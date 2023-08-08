@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='www.njust.edu.cn'>Nanjing University of Science & Technology</a>
+subtitle: <a href='http://www.njust.edu.cn'>Nanjing University of Science & Technology</a>
 
 profile:
   align: right
