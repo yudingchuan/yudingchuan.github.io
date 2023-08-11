@@ -55,6 +55,11 @@
             {%- if site.work_url -%}
             <a href="{{ site.work_url }}" title="Work"><i class="fas fa-briefcase"></i></a>
             {% endif %}
+
+            {%- if site.scilab_url -%}
+            <a href="{{ site.scilab_url }}" title="Lab Homepage"><i class=profile_pic.jpg></i></a>
+            {% endif %}
+
             {%- if site.wikidata_id -%}
             <a href="https://www.wikidata.org/wiki/{{ site.wikidata_id }}" title="Wikidata"><i class="fas fa-barcode"></i></a>
             {% endif %}
