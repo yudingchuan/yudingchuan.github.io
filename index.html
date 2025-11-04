@@ -81,6 +81,30 @@
   article.columns.pub {
     margin-bottom: .4rem !important; /* 还嫌大可改 .2rem */
   }
+  /* 仅作用于项目列表这个容器，避免被全局规则干扰 */
+#pub-list .year-title{
+  margin: 0 !important;        /* 去掉上下外边距 */
+  line-height: 1.1;            /* 紧一点 */
+  text-indent: 0.2em;          /* 你要的缩进 */
+  font-weight: 700;            /* 加粗 */
+  text-align: left;
+}
+
+/* 年份与其后的第一条目之间没有缝隙 */
+#pub-list .year-title + article.columns{
+  margin-top: 0 !important;
+}
+
+/* 统一每条项目块的底部间距（覆盖你的全局 1.75rem） */
+#pub-list article.columns{
+  margin-bottom: .4rem !important;  /* 想更紧可改 .2rem */
+}
+
+/* 最后一条项目块底部不留白（可选） */
+#pub-list article.columns:last-of-type{
+  margin-bottom: 0 !important;
+}
+
 </style>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
@@ -191,40 +215,44 @@
 
             <!--List of publications-->  
 
-            <!-- 年份：2025（同样缩进与样式；可在其下继续放 2025 的条目） -->
-              <p class="year-title has-text-left has-text-weight-bold is-size-5">2025</p>
-              <article class="columns pub">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src=".\images\publications\PS_guided.jpg">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Xxxxx: a xxxxx for xxxxx</b><br>
-                    (To be submitted)
-                  </p>
+            <div id="pub-list">
+              <!-- 2025 -->
+              <p class="year-title is-size-5">2025</p>
+              <article class="columns">
+                <div class="column is-3">
+                  <figure class="image">
+                    <img src=".\images\publications\PS_guided.jpg">
+                  </figure>
                 </div>
-              </div>
-            </article>
-            <!-- 年份：2024（首行缩进、加粗、无下边距） -->
-              <p class="year-title has-text-left has-text-weight-bold is-size-5">2024</p>
-              <article class="columns pub">
-              <div class="column is-3">
-                <figure class="image">
-                  <img src=".\images\publications\PS_guided.jpg">
-                </figure>
-              </div>
-              <div class="column">
-                <div class="content">
-                  <p>
-                    <b>Learning from phase-shifting prior: a universal deep framework for single-shot fringe analysis</b><br>
-                    (To be submitted)
-                  </p>
+                <div class="column">
+                  <div class="content">
+                    <p>
+                      <b>Xxxxx: a xxxxx for xxxxx</b><br>
+                      (To be submitted)
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </article>
+              </article>
+            
+              <!-- 2024 -->
+              <p class="year-title is-size-5">2024</p>
+              <article class="columns">
+                <div class="column is-3">
+                  <figure class="image">
+                    <img src=".\images\publications\PS_guided.jpg">
+                  </figure>
+                </div>
+                <div class="column">
+                  <div class="content">
+                    <p>
+                      <b>Learning from phase-shifting prior: a universal deep framework for single-shot fringe analysis</b><br>
+                      (To be submitted)
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
             
 
 
