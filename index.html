@@ -58,6 +58,31 @@
         }
       }
 </style>
+  <!-- 建议位置：就在 </head> 之前，且在 bulma.min.css 和 style.css 之后 -->
+<style>
+  /* 压小 “Main Projects” 标题与第一个年份之间的间距 */
+  #publications {
+    margin-bottom: .25rem !important;
+  }
+
+  /* 年份行：去掉上下外边距、保持缩进、紧一点的行高 */
+  .content p.year-title {
+    margin: 0 !important;
+    padding: 0;
+    text-indent: 0.2em;
+    line-height: 1.1;
+  }
+  /* 年份行紧贴后面的第一条条目 */
+  .content p.year-title + article.columns {
+    margin-top: 0 !important;
+  }
+
+  /* 仅收紧“项目条目”的底部空隙（不影响全站其它 columns） */
+  article.columns.pub {
+    margin-bottom: .4rem !important; /* 还嫌大可改 .2rem */
+  }
+</style>
+
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
 </head>
 
@@ -167,8 +192,8 @@
             <!--List of publications-->  
 
             <!-- 年份：2025（同样缩进与样式；可在其下继续放 2025 的条目） -->
-            <p class="has-text-left has-text-weight-bold is-size-5 mb-0" style="text-indent: 0.2em;">2025</p>
-            <article class="columns" style="margin-top: 0;">
+              <p class="year-title has-text-left has-text-weight-bold is-size-5">2025</p>
+              <article class="columns pub">
               <div class="column is-3">
                 <figure class="image">
                   <img src=".\images\publications\PS_guided.jpg">
@@ -184,8 +209,8 @@
               </div>
             </article>
             <!-- 年份：2024（首行缩进、加粗、无下边距） -->
-            <p class="has-text-left has-text-weight-bold is-size-5 mb-0" style="text-indent: 0.2em;">2024</p>
-            <article class="columns" style="margin-top: 0;">
+              <p class="year-title has-text-left has-text-weight-bold is-size-5">2024</p>
+              <article class="columns pub">
               <div class="column is-3">
                 <figure class="image">
                   <img src=".\images\publications\PS_guided.jpg">
