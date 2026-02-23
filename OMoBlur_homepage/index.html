@@ -238,7 +238,7 @@
         <div class="section-title">OMoBlur Dataset</div>
         <img src=".\images\OMoBlur_dataset.png" style="width: 100%; border-radius: 6px; border: 1px solid #ddd;" alt="Pipeline">
         <div class="caption">
-            Overview of our proposed pipeline. It extracts features effectively and reconstructs high-fidelity outputs.
+            Overview of the OMoBlur dataset generation pipeline and data examples. (Top) We employ a programmable industrial camera with an overlapping acquisition strategy to achieve a 98% exposure ratio. By accumulating (quasi-integrating) consecutive short-exposure RAW frames to physically simulate the continuous photon-integration process, and processing them through a calibrated ISP, we synthesize physically faithful object motion blur. The middle frame serves as the sharp ground-truth, and high-precision blur masks are generated via optical flow and clustering. (Bottom) The pipeline yields high-quality blur-sharp-mask data triplets. Our dataset covers diverse real-world motion types against static backgrounds, including vehicles, spinning sports balls, pedestrians, and complex textured scenes.
         </div>
     </div>
 
