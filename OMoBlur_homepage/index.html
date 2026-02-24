@@ -290,14 +290,14 @@
 
 
     <div class="section" style="margin-top: -10px;">
-        <div class="figure" style="width: 80%; margin: 0 auto;">
+        <div class="figure" style="width: 90%; margin: 0 auto;">
             <img-comparison-slider>
                 <figure slot="first" style="margin: 0;">
-                    <img src=".\images\Sony_blur.png" width="100%" alt="Input">
+                    <img src=".\images\DSC02290_blur_crop1.png" width="100%" alt="Input">
                     <figcaption class="slider-label label-left">Input (Blurry)</figcaption>
                 </figure>
                 <figure slot="second" style="margin: 0;">
-                    <img src=".\images\Sony_deblured_OMD.JPG" width="100%" alt="Ours">
+                    <img src=".\images\DSC02290_OMD_crop1.JPG" width="100%" alt="Ours">
                     <figcaption class="slider-label label-right">Ours (Restored)</figcaption>
                 </figure>
             </img-comparison-slider>
@@ -322,7 +322,7 @@
 
     <div class="section">
         <div class="section-title">OMoBlur Dataset</div>
-        <img src=".\images\OMoBlur_dataset.png" style="width: 100%; border-radius: 6px; border: 1px solid #ddd;" alt="Pipeline">
+        <img src=".\images\OMoBlur_dataset.png" style="width: 100%; border-radius: 6px; border: none;" alt="Pipeline">
         <div class="caption">
             Overview of the OMoBlur dataset generation pipeline and data examples. (Top) We employ a programmable industrial camera with an overlapping acquisition strategy to achieve a 98% exposure ratio. By accumulating (quasi-integrating) consecutive short-exposure RAW frames to physically simulate the continuous photon-integration process, and processing them through a calibrated ISP, we synthesize physically faithful object motion blur. The middle frame serves as the sharp ground-truth, and high-precision blur masks are generated via optical flow and clustering. (Bottom) The pipeline yields high-quality blur-sharp-mask data triplets. Our dataset covers diverse real-world motion types against static backgrounds, including vehicles, spinning sports balls, pedestrians, and complex textured scenes.
         </div>
