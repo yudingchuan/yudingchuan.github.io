@@ -73,38 +73,38 @@
         .button-group {
             display: flex;
             justify-content: center;
-            gap: 16px; /* 间距稍微调小，让整体更紧凑 */
+            gap: 16px; 
             flex-wrap: wrap;
             margin-bottom: 40px;
         }
 
-        /* 统一基础按钮样式：主按钮整体适度缩小 */
+        /* 统一基础按钮样式 */
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
             background-color: #ffffff;
-            padding: 10px 22px; /* 缩小内边距（原 12px 26px） */
+            padding: 10px 22px; 
             border-radius: 50px;
             text-decoration: none;
-            font-size: 0.95rem; /* 字号略微缩小（原 1rem） */
+            font-size: 0.95rem; 
             font-weight: 600;
             letter-spacing: 0.5px;
             color: #24292f; 
             border: 2px solid #24292f; 
             box-shadow: 0 4px 12px rgba(36, 41, 47, 0.06);
             transition: all 0.3s ease;
-            cursor: pointer;
+            cursor: pointer; /* Paper 和 Code 显示小手 */
         }
 
         .btn svg {
-            width: 18px; /* 图标随之等比例缩小（原 20px） */
+            width: 18px; 
             height: 18px;
             fill: currentColor;
             transition: transform 0.3s ease;
         }
 
-        /* 统一的悬停效果：黑底白字 */
+        /* 统一的悬停效果：黑底白字、上浮 */
         .btn:hover {
             background-color: #24292f;
             color: #ffffff;
@@ -120,6 +120,11 @@
         .dataset-dropdown {
             position: relative;
             display: inline-block;
+        }
+
+        /* 修复 1：Dataset 作为菜单触发器，不需要显示为手型 */
+        .dataset-dropdown .btn {
+            cursor: default;
         }
 
         /* 隐形桥梁与弹出容器 */
@@ -138,11 +143,15 @@
             z-index: 10;
         }
 
-        /* 核心呼应 1：悬停整个区域时，主按钮保持激活状态 */
+        /* 修复 2：悬停整个区域时，主按钮不仅保持黑底，还要保持上浮和图标放大 */
         .dataset-dropdown:hover .btn {
             background-color: #24292f;
             color: #ffffff;
             box-shadow: 0 6px 18px rgba(36, 41, 47, 0.2);
+            transform: translateY(-2px); /* 维持上浮状态 */
+        }
+        .dataset-dropdown:hover .btn svg {
+            transform: scale(1.1); /* 维持图标放大状态 */
         }
         
         /* 悬停时弹出子菜单 */
@@ -164,17 +173,16 @@
             font-size: 0.9rem;
             font-weight: 600;
             color: #24292f;
-            border: 1px solid #d0d7de; /* 新增：1px的高级细灰线 */
+            border: 1px solid #d0d7de; /* 1px的高级细灰线 */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
-            transition: all 0.3s ease;
+            transition: all 0.3s ease; /* 统一平滑过渡 */
         }
 
-        /* 核心呼应 2：悬停时底色不变，利用双重 shadow 模拟 2px 边框并增加发光 */
+        /* 修复 3：仅改变边框颜色，不再模拟双重阴影，彻底解决抽搐怪异感 */
         .dropdown-btn:hover {
             background-color: #ffffff; 
-            border: 1px solid #24292f; 
-            /* 重点：第一层 shadow 模拟加粗边框防抖动，第二层 shadow 发光呼应 */
-            box-shadow: 0 0 0 1px #24292f, 0 6px 16px rgba(36, 41, 47, 0.22); 
+            border-color: #24292f; /* 灰线平滑过渡为深空灰线 */
+            box-shadow: 0 6px 16px rgba(36, 41, 47, 0.22); /* 阴影平滑加深 */
             transform: translateY(-2px);
         }
 
