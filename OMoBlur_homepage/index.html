@@ -73,33 +73,33 @@
         .button-group {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 16px; /* 间距稍微调小，让整体更紧凑 */
             flex-wrap: wrap;
             margin-bottom: 40px;
         }
 
-        /* 统一基础按钮样式：深空灰极简风 */
+        /* 统一基础按钮样式：主按钮整体适度缩小 */
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
             background-color: #ffffff;
-            padding: 12px 26px;
+            padding: 10px 22px; /* 缩小内边距（原 12px 26px） */
             border-radius: 50px;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.95rem; /* 字号略微缩小（原 1rem） */
             font-weight: 600;
             letter-spacing: 0.5px;
             color: #24292f; 
             border: 2px solid #24292f; 
-            box-shadow: 0 4px 12px rgba(36, 41, 47, 0.08);
+            box-shadow: 0 4px 12px rgba(36, 41, 47, 0.06);
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .btn svg {
-            width: 20px;
-            height: 20px;
+            width: 18px; /* 图标随之等比例缩小（原 20px） */
+            height: 18px;
             fill: currentColor;
             transition: transform 0.3s ease;
         }
@@ -130,7 +130,7 @@
             transform: translateX(-50%) translateY(10px); 
             display: flex;
             gap: 12px;
-            padding-bottom: 15px; /* 隐形桥梁：防止鼠标从主按钮移向子菜单时中断 */
+            padding-bottom: 15px; 
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
@@ -138,7 +138,7 @@
             z-index: 10;
         }
 
-        /* 核心呼应 1：悬停整个区域时，让主按钮保持“黑底白字”的激活状态 */
+        /* 核心呼应 1：悬停整个区域时，主按钮保持激活状态 */
         .dataset-dropdown:hover .btn {
             background-color: #24292f;
             color: #ffffff;
@@ -152,7 +152,7 @@
             transform: translateX(-50%) translateY(0); 
         }
 
-        /* 弹出的小按钮样式：默认轻量化，预留透明边框 */
+        /* 弹出的小按钮样式：细灰线勾勒边界 */
         .dropdown-btn {
             display: flex;
             align-items: center;
@@ -164,16 +164,17 @@
             font-size: 0.9rem;
             font-weight: 600;
             color: #24292f;
-            border: 2px solid transparent; /* 预留边框空间，防止悬停时页面抖动 */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); /* 默认极淡的阴影 */
+            border: 1px solid #d0d7de; /* 新增：1px的高级细灰线 */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
             transition: all 0.3s ease;
         }
 
-        /* 核心呼应 2：悬停时底色不变，浮现深空灰边框，阴影加深 */
+        /* 核心呼应 2：悬停时底色不变，利用双重 shadow 模拟 2px 边框并增加发光 */
         .dropdown-btn:hover {
             background-color: #ffffff; 
-            border: 2px solid #24292f; 
-            box-shadow: 0 6px 16px rgba(36, 41, 47, 0.22); 
+            border: 1px solid #24292f; 
+            /* 重点：第一层 shadow 模拟加粗边框防抖动，第二层 shadow 发光呼应 */
+            box-shadow: 0 0 0 1px #24292f, 0 6px 16px rgba(36, 41, 47, 0.22); 
             transform: translateY(-2px);
         }
 
@@ -184,7 +185,7 @@
             transition: transform 0.3s ease; 
         }
 
-        /* 悬停时，Logo 原色保留，仅做轻微放大增加灵动感 */
+        /* 悬停时，Logo 原色保留，轻微放大增加灵动感 */
         .dropdown-btn:hover img {
             transform: scale(1.1);
         }
