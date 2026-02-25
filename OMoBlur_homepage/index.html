@@ -67,7 +67,22 @@
             color: var(--text-light);
             margin-bottom: 25px;
         }
+/* 图片与组件下方的说明文字（默认居中，用于短句） */
+        .caption {
+            text-align: center; /* 保持居中 */
+            font-size: 0.9em;
+            color: var(--text-light);
+            margin-top: 10px;
+        }
 
+        /* 专门为长段落准备的两端对齐样式 */
+        .caption-justify {
+            text-align: justify; /* 两端对齐 */
+            font-size: 0.9em;
+            color: var(--text-light);
+            margin-top: 10px;
+            line-height: 1.6; /* 增加一点行高让长段落更好读 */
+        }
 /* ================= 按钮区样式 ================= */
         /* 按钮区外层容器 */
         .button-group {
@@ -495,7 +510,7 @@
     <div class="section">
         <div class="section-title">OMoBlur Dataset</div>
         <img src=".\images\OMoBlur_dataset.png" style="width: 100%; border-radius: 6px; border: none;" alt="Pipeline">
-        <div class="caption">
+        <div class="caption-justify">
             Overview of the OMoBlur dataset generation pipeline and data examples. (Top) We employ a programmable industrial camera with an overlapping acquisition strategy to achieve a 98% exposure ratio. By accumulating (quasi-integrating) consecutive short-exposure RAW frames to physically simulate the continuous photon-integration process, and processing them through a calibrated ISP, we synthesize physically faithful object motion blur. The middle frame serves as the sharp ground-truth, and high-precision blur masks are generated via optical flow and clustering. (Bottom) The pipeline yields high-quality blur-sharp-mask data triplets. Our dataset covers diverse real-world motion types against static backgrounds, including vehicles, spinning sports balls, pedestrians, and complex textured scenes.
         </div>
     </div>
