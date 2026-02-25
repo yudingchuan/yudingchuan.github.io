@@ -68,37 +68,7 @@
             margin-bottom: 25px;
         }
 
-        /* /* 按钮区样式 */
-        .button-group {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-        .btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 0.95em;
-            font-weight: 500;
-            transition: background-color 0.2s;
-        }
-        .btn:hover {
-            background-color: #555;
-        }
-        .btn.primary {
-            background-color: var(--primary-color);
-        }
-        .btn.primary:hover {
-            background-color: #004494;
-        } */
-
+/* ================= 按钮区样式 ================= */
         /* 按钮区外层容器 */
         .button-group {
             display: flex;
@@ -108,7 +78,7 @@
             margin-bottom: 40px;
         }
 
-        /* 基础按钮样式：胶囊形状、白底、带阴影 */
+        /* 统一基础按钮样式：深空灰极简风 */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -120,10 +90,13 @@
             font-size: 1rem;
             font-weight: 600;
             letter-spacing: 0.5px;
+            color: #24292f; 
+            border: 2px solid #24292f; 
+            box-shadow: 0 4px 12px rgba(36, 41, 47, 0.08);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        /* SVG 图标自适应文字颜色 */
         .btn svg {
             width: 20px;
             height: 20px;
@@ -131,61 +104,16 @@
             transition: transform 0.3s ease;
         }
 
-        /* 悬停时图标轻微放大 */
+        /* 统一的悬停效果：黑底白字 */
+        .btn:hover {
+            background-color: #24292f;
+            color: #ffffff;
+            box-shadow: 0 6px 18px rgba(36, 41, 47, 0.2);
+            transform: translateY(-2px);
+        }
+        
         .btn:hover svg {
             transform: scale(1.1);
-        }
-
-        /* --- 1. CVPR 论文按钮 (深红色主题) --- */
-        .btn-paper {
-            color: #b31b1b;
-            border: 2px solid #b31b1b;
-            box-shadow: 0 4px 15px rgba(179, 27, 27, 0.1);
-        }
-        .btn-paper:hover {
-            background-color: #b31b1b;
-            color: #ffffff;
-            box-shadow: 0 6px 20px rgba(179, 27, 27, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* --- 2. GitHub 代码按钮 (深蓝/黑色主题) --- */
-        .btn-code {
-            color: #1a1e23;
-            border: 2px solid #1a1e23;
-            box-shadow: 0 4px 15px rgba(26, 30, 35, 0.1);
-        }
-        .btn-code:hover {
-            background-color: #1a1e23;
-            color: #ffffff;
-            box-shadow: 0 6px 20px rgba(26, 30, 35, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* --- 3. Google Drive 数据集按钮 (Google 蓝色主题) --- */
-        .btn-gdrive {
-            color: #1a73e8;
-            border: 2px solid #1a73e8;
-            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.1);
-        }
-        .btn-gdrive:hover {
-            background-color: #1a73e8;
-            color: #ffffff;
-            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* --- 4. 百度网盘 数据集按钮 (百度亮蓝色主题) --- */
-        .btn-baidu {
-            color: #06a7ff;
-            border: 2px solid #06a7ff;
-            box-shadow: 0 4px 15px rgba(6, 167, 255, 0.1);
-        }
-        .btn-baidu:hover {
-            background-color: #06a7ff;
-            color: #ffffff;
-            box-shadow: 0 6px 20px rgba(6, 167, 255, 0.3);
-            transform: translateY(-2px);
         }
 
         /* --- Dataset 下拉菜单容器 --- */
@@ -194,87 +122,73 @@
             display: inline-block;
         }
 
-        /* Dataset 主按钮样式 (这里用现代紫蓝色区分开) */
-        .btn-dataset {
-            color: #6366f1;
-            border: 2px solid #6366f1;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.1);
-            cursor: default; /* 因为是触发展开，不需要显示为手型链接 */
-        }
-        .btn-dataset:hover {
-            background-color: #6366f1;
-            color: #ffffff;
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
-        }
-
-        /* 悬停时弹出的容器 */
+        /* 隐形桥梁与弹出容器 */
         .dropdown-content {
             position: absolute;
-            bottom: 100%; /* 出现在按钮正上方 */
+            bottom: 100%; 
             left: 50%;
-            transform: translateX(-50%) translateY(10px); /* 初始稍微偏下一点 */
+            transform: translateX(-50%) translateY(10px); 
             display: flex;
             gap: 12px;
-            padding-bottom: 15px; /* 极其关键：这是悬停的“隐形桥梁”，防止鼠标移上去时菜单消失 */
+            padding-bottom: 15px; /* 隐形桥梁：防止鼠标从主按钮移向子菜单时中断 */
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* 平滑弹出的动画曲线 */
-            white-space: nowrap; /* 保证弹出按钮不换行 */
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            white-space: nowrap; 
             z-index: 10;
         }
 
-        /* 鼠标悬停主按钮时，触发菜单弹出 */
+        /* 核心呼应 1：悬停整个区域时，让主按钮保持“黑底白字”的激活状态 */
+        .dataset-dropdown:hover .btn {
+            background-color: #24292f;
+            color: #ffffff;
+            box-shadow: 0 6px 18px rgba(36, 41, 47, 0.2);
+        }
+        
+        /* 悬停时弹出子菜单 */
         .dataset-dropdown:hover .dropdown-content {
             opacity: 1;
             visibility: visible;
-            transform: translateX(-50%) translateY(0); /* 向上浮动到正确位置 */
+            transform: translateX(-50%) translateY(0); 
         }
 
-        /* 弹出的小按钮样式 */
+        /* 弹出的小按钮样式：默认轻量化，预留透明边框 */
         .dropdown-btn {
             display: flex;
             align-items: center;
             gap: 6px;
             background-color: #ffffff;
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 20px;
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 600;
-            color: #333;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 1px solid #eaeaea;
-            transition: all 0.2s ease;
-        }
-        .dropdown-btn:hover {
-            background-color: #f8f9fa;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            color: #24292f;
+            border: 2px solid transparent; /* 预留边框空间，防止悬停时页面抖动 */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); /* 默认极淡的阴影 */
+            transition: all 0.3s ease;
         }
 
-        /* 预留给你放入的 Logo 图片的尺寸 */
+        /* 核心呼应 2：悬停时底色不变，浮现深空灰边框，阴影加深 */
+        .dropdown-btn:hover {
+            background-color: #ffffff; 
+            border: 2px solid #24292f; 
+            box-shadow: 0 6px 16px rgba(36, 41, 47, 0.22); 
+            transform: translateY(-2px);
+        }
+
         .dropdown-btn img {
             width: 18px;
             height: 18px;
             object-fit: contain;
+            transition: transform 0.3s ease; 
         }
 
-        /* 内容区块样式 */
-        .section {
-            margin-bottom: 50px;
+        /* 悬停时，Logo 原色保留，仅做轻微放大增加灵动感 */
+        .dropdown-btn:hover img {
+            transform: scale(1.1);
         }
-        .section-title {
-            font-size: 1.5em;
-            font-weight: 600;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 8px;
-            margin-bottom: 20px;
-        }
-        .abstract-text {
-            text-align: justify;
-            font-size: 1.05em;
-            color: #444;
-        }
+        /* ============================================== */
 
         /* 图片与滑动组件样式 */
         .figure {
@@ -446,18 +360,18 @@
             <a href="#" class="btn">📊 Dataset</a>
         </div> -->
         <div class="button-group">
-            <a href="https://openreview.net/" class="btn btn-paper">
+            <a href="https://openreview.net/" class="btn">
                 <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
                 Paper
             </a>
     
-            <a href="#" class="btn btn-code">
+            <a href="#" class="btn">
                 <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.379.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>
                 CODE
             </a>
     
             <div class="dataset-dropdown">
-                <div class="btn btn-dataset">
+                <div class="btn">
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 3.79 2 6s4.48 4 10 4 10-1.79 10-4-4.48-4-10-4zm0 10c-5.52 0-10-1.79-10-4v-2.26c1.69 1.25 5.37 2.26 10 2.26s8.31-1.01 10-2.26V12c0 2.21-4.48 4-10 4zm0 6c-5.52 0-10-1.79-10-4v-2.26c1.69 1.25 5.37 2.26 10 2.26s8.31-1.01 10-2.26V18c0 2.21-4.48 4-10 4z"/></svg>
                     DATASET
                 </div>
