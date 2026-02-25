@@ -220,35 +220,65 @@
             line-height: 1.6;
         }
         
-        /* 图片与滑动组件样式 */
+/* ================= 图片滑动组件修复与美化 ================= */
         .figure {
             width: 100%;
             margin: 20px 0;
-            border-radius: 8px;
+            /* 移除了旧的 border-radius，交给滑动组件本体处理 */
+        }
+
+        img-comparison-slider {
+            outline: none;
+            border-radius: 8px; /* 核心修复：强制在最外层裁切圆角，去除溢出白边 */
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            
+            /* 滑动分割线样式 */
+            --divider-width: 2px;
+            --divider-color: #ffffff;
+            --divider-shadow: 0 0 5px rgba(0,0,0,0.4); /* 让分割线在浅色背景下也能看清 */
         }
-        .caption {
-            text-align: center;
-            font-size: 0.9em;
-            color: var(--text-light);
-            margin-top: 10px;
+
+        /* 核心修复：彻底消灭底部的白边/黑线 */
+        img-comparison-slider figure {
+            margin: 0;
+            display: flex; /* 使用 flex 布局，消除任何潜在的基线空隙 */
+            height: 100%;
         }
-        
-        /* 滑动组件内部文字标签样式 */
+
+        img-comparison-slider img {
+            display: block; /* 取消行内元素属性 */
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 保证两张图就算长宽比有极其微小的差异，也能完美对齐填满 */
+        }
+
+        /* 修复标签大小不一、位置不齐的问题 */
         .slider-label {
             position: absolute;
             bottom: 15px;
             background-color: rgba(0, 0, 0, 0.65);
             color: white;
-            padding: 4px 12px;
+            padding: 6px 14px;
             border-radius: 4px;
             font-size: 14px;
             font-weight: 500;
+            line-height: 1; /* 锁定行高，保证左右高度绝对一致 */
             backdrop-filter: blur(2px);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
         }
         .label-left { left: 15px; }
         .label-right { right: 15px; }
+
+        /* 自定义高级把手（圆饼形+深色阴影）防隐身 */
+        .custom-handle {
+            cursor: ew-resize;
+            filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.5)); /* 强力阴影，保证在任何边缘都清晰可见 */
+        }
 
         /* 4列网格布局，自带间距 */
         .results-grid {
@@ -425,15 +455,25 @@
 
     <div class="section" style="margin-top: -10px;">
         <div class="figure" style="width: 85%; margin: 0 auto;">
+            <div class="section" style="margin-top: -10px;">
+        <div class="figure" style="width: 85%; margin: 0 auto;">
             <img-comparison-slider>
-                <figure slot="first" style="margin: 0;">
-                    <img src=".\images\DSC02290_blur_crop1.png" width="100%" alt="Input">
+                
+                <figure slot="first">
+                    <img src=".\images\DSC02290_blur_crop1.png" alt="Input">
                     <figcaption class="slider-label label-left">Input (Blurry)</figcaption>
                 </figure>
-                <figure slot="second" style="margin: 0;">
-                    <img src=".\images\DSC02290_OMD_crop1.JPG" width="100%" alt="Ours">
+                
+                <figure slot="second">
+                    <img src=".\images\DSC02290_OMD_crop1.JPG" alt="Ours">
                     <figcaption class="slider-label label-right">Ours (Restored)</figcaption>
                 </figure>
+
+                <svg slot="handle" class="custom-handle" xmlns="http://www.w3.org/2000/svg" width="44" viewBox="-8 -8 16 16">
+                    <circle r="8" fill="white"></circle>
+                    <path d="M -2 -3 L -5 0 L -2 3 M 2 -3 L 5 0 L 2 3" fill="none" stroke="#333" stroke-width="1.5"></path>
+                </svg>
+
             </img-comparison-slider>
         </div>
         <div class="caption">
