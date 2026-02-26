@@ -709,22 +709,29 @@
 
 
 <script>
+    // 1. 一键复制 BibTeX 的功能
     document.getElementById('copyBtn').addEventListener('click', function() {
         const bibtexText = document.getElementById('bibtex').innerText;
         navigator.clipboard.writeText(bibtexText).then(() => {
             const btn = document.getElementById('copyBtn');
             const originalHTML = btn.innerHTML;
             
-            // 复制成功后改变文字和颜色
             btn.innerHTML = 'Copied!';
             btn.classList.add('copied');
             
-            // 2秒后恢复原状
             setTimeout(() => {
                 btn.innerHTML = originalHTML;
                 btn.classList.remove('copied');
             }, 2000);
         });
+    });
+
+    // 2. 自动让外部链接在新标签页打开的功能
+    document.querySelectorAll('a').forEach(link => {
+        if (link.getAttribute('href') && link.getAttribute('href') !== '#') {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+        }
     });
 </script>
 </body>
