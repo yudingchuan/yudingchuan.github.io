@@ -449,6 +449,41 @@
             padding-top: 20px;
             border-top: 1px solid #eee;
         }
+
+        /* ================= 引用与复制按钮样式 ================= */
+        .citation-container {
+            position: relative;
+            margin-top: 10px;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: #e1e4e8; /* 浅灰底色 */
+            color: #24292e;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .copy-btn:hover {
+            background-color: #d0d7de; /* 悬停加深 */
+        }
+
+        /* 复制成功后的变色状态（绿色） */
+        .copy-btn.copied {
+            background-color: #2ea043;
+            color: white;
+        }
+        
     </style>
 </head>
 <body>
@@ -645,13 +680,20 @@
     </div>
 
     <div class="section">
-        <div class="section-title">Citation</div>
-        <pre><code>@inproceedings{yourname2026awesome,
-  title     = {Your Awesome Paper Title Here: A Novel Approach to Visual Restoration},
-  author    = {Author, First and Author, Second and Author, Third},
-  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year      = {2026}
-}</code></pre>
+            <div class="section-title">Citation</div>       
+            <div class="citation-container">
+                <button class="copy-btn" id="copyBtn">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg>
+                    Copy
+                </button>
+                
+                <pre><code id="bibtex">@inproceedings{yu2026omoblur,
+                  title     = {OMoBlur: An Object Motion Blur Dataset and Benchmark for Real-World Local Motion Deblurring},
+                  author    = {Yu, Dingchuan and Li, Jiatong and Zhou, Jingwen and Zhuge, Zhengyue and Chen, Yueting and Li, Qi},
+                  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+                  year      = {2026}
+                }</code></pre>
+            </div>
     </div>
 
     <footer>
@@ -660,5 +702,25 @@
 
 </div>
 
+
+<script>
+    document.getElementById('copyBtn').addEventListener('click', function() {
+        const bibtexText = document.getElementById('bibtex').innerText;
+        navigator.clipboard.writeText(bibtexText).then(() => {
+            const btn = document.getElementById('copyBtn');
+            const originalHTML = btn.innerHTML;
+            
+            // 复制成功后改变文字和颜色
+            btn.innerHTML = 'Copied!';
+            btn.classList.add('copied');
+            
+            // 2秒后恢复原状
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('copied');
+            }, 2000);
+        });
+    });
+</script>
 </body>
 </html>
