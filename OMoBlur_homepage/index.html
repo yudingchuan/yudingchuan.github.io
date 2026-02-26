@@ -594,7 +594,7 @@
                     The Necessity of Physical Continuity in Blur Synthesis
                 </div>
                 <p class="key-point-desc">
-                    We demonstrate that the physical continuity of accumulated short exposures is the deciding factor for a deblurring network's ability to generalize to real-world scenarios. Frame interpolation cannot bridge the domain gap from exposure gaps, as its synthesized data distribution fundamentally differs from the physical photon-integration process of a real camera.
+                    We demonstrate that the physical continuity of accumulated short exposures is the deciding factor for a deblurring network's ability to generalize to real-world scenarios. Frame interpolation cannot bridge the domain gap from large exposure gaps, as its synthesized data distribution fundamentally differs from the physical photon-integration process of a real camera.
                 </p>
             </div>
 
@@ -604,7 +604,7 @@
                     Maximizing Training Context for Better Generalization
                 </div>
                 <p class="key-point-desc">
-                    OMDNet employs an asymmetric training strategy to leverage auxiliary data unavailable at test time. Multi-frame optical flow supervision significantly enhances complex motion modeling, while integrating ground-truth data into the training output improves blur-region gating accuracy during inference.
+                    Our OMDNet employs an asymmetric training strategy to leverage auxiliary data unavailable at test time. Multi-frame optical flow supervision significantly enhances complex motion modeling, while integrating ground-truth data into the training output (Adaptive Gated Fusion Mechanism) improves blur-region gating accuracy during inference.
                 </p>
             </div>
         </div>
@@ -675,7 +675,7 @@
 
     <div class="section">
         <div class="section-title">Discussion</div>
-        <p>Hover over the images to see the blurry inputs. </p>  
+        <p>Limitations & future works. Coming soon ~ </p>  
         
     </div>
 
@@ -688,11 +688,11 @@
                 </button>
                 
                 <pre><code id="bibtex">@inproceedings{yu2026omoblur,
-      title     = {OMoBlur: An Object Motion Blur Dataset and Benchmark for Real-World Local Motion Deblurring},
-      author    = {Yu, Dingchuan and Li, Jiatong and Zhou, Jingwen and Zhuge, Zhengyue and Chen, Yueting and Li, Qi},
-      booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-      year      = {2026}
-    }</code></pre>
+  title     = {OMoBlur: An Object Motion Blur Dataset and Benchmark for Real-World Local Motion Deblurring},
+  author    = {Yu, Dingchuan and Li, Jiatong and Zhou, Jingwen and Zhuge, Zhengyue and Chen, Yueting and Li, Qi},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2026}
+}</code></pre>
             </div>
     </div>
 
