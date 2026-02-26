@@ -239,30 +239,33 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
         }
 
+/* 调小卡片标题字号，并降低一点字重，不再与 Section 标题抢风头 */
         .key-point-title {
-            font-size: 1.15em;
-            font-weight: 700;
+            font-size: 1.05em; /* 从 1.15em 缩小 */
+            font-weight: 600;  /* 从 700 降到 600，显得更清爽 */
             color: #1a1e23;
-            margin-bottom: 10px;
+            margin-bottom: 8px; /* 标题和正文的间距微调紧凑些 */
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
-        /* 标题前面的小图标 */
+        /* 同步缩小标题前面的小图标 */
         .key-point-title svg {
-            width: 22px;
-            height: 22px;
+            width: 18px; /* 从 22px 缩小 */
+            height: 18px;
             fill: #24292f;
-            flex-shrink: 0; /* 防止图标被长标题挤压变形 */
+            flex-shrink: 0; 
         }
 
+        /* 调小卡片正文字号，拉开与标题的层级 */
         .key-point-desc {
-            font-size: 1.05em;
-            color: #444;
+            font-size: 0.95em; /* 从 1.05em 缩小 */
+            color: #555;       /* 颜色稍微调浅一丢丢，增加阅读舒适度 */
             line-height: 1.6;
             margin: 0;
-            text-align: justify; /* 段落两端对齐，保持严谨 */
+            text-align: justify; 
+        }
         }
 /* ================= 内容区块样式 ================= */
         .section {
