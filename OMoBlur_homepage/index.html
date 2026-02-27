@@ -483,7 +483,78 @@
             background-color: #2ea043;
             color: white;
         }
-        
+/* ================= 讨论区折叠条 (Discussion Accordion) 样式 ================= */
+        .discussion-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .discussion-item {
+            background-color: #f8f9fa; /* 与 Key Points 统一的浅灰底色 */
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .discussion-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .discussion-item summary {
+            padding: 16px 20px;
+            font-size: 1.05em;
+            font-weight: 600;
+            color: #24292f;
+            cursor: pointer;
+            list-style: none; /* 隐藏原生的丑陋黑三角 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+
+        /* 隐藏 Webkit 内核浏览器的默认三角 */
+        .discussion-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .discussion-item summary:hover {
+            background-color: #f0f3f6; /* 悬停时稍微加深一点点 */
+        }
+
+        /* 自定义右侧的平滑下拉箭头 (使用 SVG Background) */
+        .discussion-item summary::after {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2324292f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: transform 0.3s ease; /* 箭头旋转动画 */
+        }
+
+        /* 展开状态下的样式 */
+        .discussion-item[open] summary {
+            border-bottom: 1px solid #e1e4e8;
+        }
+
+        /* 展开时箭头旋转 180 度 */
+        .discussion-item[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .discussion-content {
+            padding: 16px 20px;
+            font-size: 0.95em;
+            color: #555;
+            line-height: 1.6;
+            text-align: justify;
+            background-color: #ffffff; /* 展开内容区用纯白，形成层次感 */
+        }        
     </style>
 </head>
 <body>
@@ -676,7 +747,29 @@
 
     <div class="section">
         <div class="section-title">Discussion</div>
-        <p>Limitations & future works. Coming soon ~ </p>  
+        
+        <div class="discussion-container">
+            <details class="discussion-item">
+                <summary>Limitation 1: </summary>
+                <div class="discussion-content">
+                    ddd
+                </div>
+            </details>
+
+            <details class="discussion-item">
+                <summary>Future Work</summary>
+                <div class="discussion-content">
+                    ddd
+                </div>
+            </details>
+
+            <details class="discussion-item">
+                <summary>Discussion on </summary>
+                <div class="discussion-content">
+                    ddd
+                </div>
+            </details>
+        </div>
         
     </div>
 
