@@ -526,7 +526,30 @@
         }
 
         /* 自定义右侧的平滑下拉箭头 (使用 SVG Background) */
-        .discussion-item summary::after {
+        .discussion-item summary {
+            padding: 16px 20px;
+            font-size: 1.05em;
+            font-weight: 600;
+            color: #24292f;
+            cursor: pointer;
+            list-style: none; 
+            display: flex;
+            justify-content: flex-start; /* 1. 改为靠左对齐 */
+            align-items: center;
+            gap: 12px; /* 2. 设置箭头和文字之间的间距 */
+            transition: background-color 0.2s ease;
+        }
+
+        .discussion-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .discussion-item summary:hover {
+            background-color: #f0f3f6; 
+        }
+
+        /* 3. 将 ::after 改为 ::before，让箭头出现在文字前面 */
+        .discussion-item summary::before {
             content: "";
             display: inline-block;
             width: 20px;
@@ -534,17 +557,20 @@
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2324292f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
             background-size: contain;
             background-repeat: no-repeat;
-            transition: transform 0.3s ease; /* 箭头旋转动画 */
+            flex-shrink: 0; /* 防止标题过长时箭头被挤压变形 */
+            
+            /* 默认状态下，让箭头向右指 */
+            transform: rotate(-90deg);
+            transition: transform 0.3s ease; 
         }
 
-        /* 展开状态下的样式 */
         .discussion-item[open] summary {
             border-bottom: 1px solid #e1e4e8;
         }
 
-        /* 展开时箭头旋转 180 度 */
-        .discussion-item[open] summary::after {
-            transform: rotate(180deg);
+        /* 4. 展开状态下，箭头旋转回向下指 */
+        .discussion-item[open] summary::before {
+            transform: rotate(0deg);
         }
 
         .discussion-content {
@@ -555,6 +581,125 @@
             text-align: justify;
             background-color: #ffffff; /* 展开内容区用纯白，形成层次感 */
         }        
+
+
+        /* ================= 序列帧轮播控制台样式 ================= */
+        .seq-player-container {
+            background-color: #f8f9fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .seq-viewport {
+            width: 100%;
+            border-radius: 6px;
+            overflow: hidden;
+            background-color: #eee; /* 图片加载前的占位底色 */
+            aspect-ratio: 16 / 9; /* 你可以根据你的图片比例修改这里，比如 4/3 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .seq-viewport img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .seq-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* 播放/暂停按钮 */
+        .play-btn {
+            background: #24292f;
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .play-btn:hover {
+            background: #000;
+            transform: scale(1.05);
+        }
+        .play-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* 帧率控制区 */
+        .fps-control-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9em;
+            font-weight: 500;
+            color: #24292f;
+        }
+
+        /* 原生滑杆美化 */
+        .fps-slider {
+            -webkit-appearance: none;
+            width: 120px;
+            height: 4px;
+            background: #d0d7de;
+            border-radius: 2px;
+            outline: none;
+        }
+        .fps-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #24292f;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .fps-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        /* 数字输入框美化 */
+        .fps-input {
+            width: 46px;
+            padding: 4px 8px;
+            border: 1px solid #d0d7de;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.9em;
+            text-align: center;
+            color: #24292f;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .fps-input:focus {
+            border-color: #24292f;
+        }
+        /* 隐藏输入框自带的上下小箭头 */
+        .fps-input::-webkit-outer-spin-button,
+        .fps-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -757,9 +902,23 @@
                     
                     <p><strong>Boundaries of Local Motion Deblurring:</strong> Please refer to the dynamic motion clip below to observe the operational boundaries.</p>
                     
-                    <div style="text-align: center; margin: 15px 0; padding: 30px; background-color: #f0f3f6; border: 2px dashed #d0d7de; border-radius: 8px;">
-                        <em>[Video/Carousel Component Placeholder]</em><br>
-                        <span style="font-size: 0.85em; color: #666;">Insert your photo carousel with frame rate controls and caption here.</span>
+                    <div class="seq-player-container">
+                        <div class="seq-viewport">
+                            <img id="motionSeqFrame" src=".\images\seq\frame_0001.jpg" alt="Motion Sequence">
+                        </div>
+                        
+                        <div class="seq-controls">
+                            <button id="seqPlayBtn" class="play-btn" aria-label="Pause">
+                                <svg id="pauseIcon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                                <svg id="playIcon" viewBox="0 0 24 24" style="display: none;"><path d="M8 5v14l11-7z"/></svg>
+                            </button>
+
+                            <div class="fps-control-group">
+                                <span>FPS:</span>
+                                <input type="range" id="fpsSlider" class="fps-slider" min="1" max="60" value="15">
+                                <input type="number" id="fpsInput" class="fps-input" min="1" max="60" value="15">
+                            </div>
+                        </div>
                     </div>
                     
                     <p><strong>Generalization to Smartphone Images:</strong> Currently, our model cannot process these effectively. Due to the complex multi-frame strategies employed by modern smartphone ISPs, the resulting blurry outputs no longer follow the data distribution of a single-exposure physical blur.</p>
@@ -791,7 +950,7 @@
             <details class="discussion-item">
                 <summary>Rethinking the Dataset Paradigm: Must Ground Truth be the Physical "Truth"?</summary>
                 <div class="discussion-content">
-                    <p>Whether utilizing a coaxial beam splitter system or our proposed approach, ensuring the sharpness of the Ground Truth necessitates a very short exposure time. In urban nightscapes, this creates an inherent conflict between signal-to-noise ratio and dynamic range. While High Dynamic Range (HDR) techniques are traditionally employed to balance exposure, capturing a GT that simultaneously features well-preserved highlights (like neon signs), clean shadow details, and absolute motion-free sharpness in dynamic scenes remains a formidable challenge, often plagued by ghosting artifacts.</p>
+                    <p>Whether utilizing a coaxial beam splitter system or our proposed approach, ensuring the sharpness of the Ground Truth necessitates a very short exposure time. In urban nightscapes, this creates an inherent conflict between signal-to-noise ratio and dynamic range. While High Dynamic Range (HDR) techniques are traditionally employed to balance exposure, capturing a GT that simultaneously features well-preserved highlights (like neon signs), clean shadow details, and absolute motion-free sharpness in dynamic scenes remains a formidable challenge.</p>
                     <p>This leads us to a paradigm shift: perhaps what we truly need for effective network training is a perceptually "pleasing" GT, rather than a strictly physical, single-exposure capture.</p>
                     <p>Ground Truth does not have to be the 'truth'. </p>
                 </div>
@@ -853,6 +1012,112 @@
             link.setAttribute('target', '_blank');
             link.setAttribute('rel', 'noopener noreferrer');
         }
+    });
+
+    // ================= 序列帧轮播控制逻辑 =================
+    document.addEventListener("DOMContentLoaded", function() {
+        // 1. 在这里填入你所有的序列帧图片路径
+        const frameUrls = [
+            ".\\images\\seq\\frame_0001.jpg",
+            ".\\images\\seq\\frame_0002.jpg",
+            ".\\images\\seq\\frame_0003.jpg",
+            ".\\images\\seq\\frame_0004.jpg",
+            ".\\images\\seq\\frame_0005.jpg",
+            // ... 根据需要继续添加
+        ];
+
+        // 如果没有图片，则不执行后续逻辑
+        if(frameUrls.length === 0) return;
+
+        const imgElement = document.getElementById('motionSeqFrame');
+        const playBtn = document.getElementById('seqPlayBtn');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const fpsSlider = document.getElementById('fpsSlider');
+        const fpsInput = document.getElementById('fpsInput');
+
+        let currentFrameIdx = 0;
+        let isPlaying = true;
+        let currentFps = parseInt(fpsSlider.value);
+        let playInterval = null;
+
+        // 预加载图片，防止播放时闪烁
+        const preloadedImages = [];
+        frameUrls.forEach(url => {
+            const img = new Image();
+            img.src = url;
+            preloadedImages.push(img);
+        });
+
+        // 渲染下一帧
+        function tick() {
+            currentFrameIdx = (currentFrameIdx + 1) % frameUrls.length;
+            imgElement.src = frameUrls[currentFrameIdx];
+        }
+
+        // 启动播放器
+        function startPlayback() {
+            if (playInterval) clearInterval(playInterval);
+            const delayMs = 1000 / currentFps;
+            playInterval = setInterval(tick, delayMs);
+            
+            isPlaying = true;
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+        }
+
+        // 暂停播放器
+        function stopPlayback() {
+            if (playInterval) clearInterval(playInterval);
+            playInterval = null;
+            
+            isPlaying = false;
+            pauseIcon.style.display = 'none';
+            playIcon.style.display = 'block';
+        }
+
+        // 切换播放/暂停状态
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                stopPlayback();
+            } else {
+                startPlayback();
+            }
+        });
+
+        // 统一处理 FPS 变化
+        function handleFpsChange(newVal) {
+            let parsedVal = parseInt(newVal);
+            
+            // 限制输入范围在 1-60 之间，并且只接受整数
+            if (isNaN(parsedVal)) parsedVal = currentFps;
+            if (parsedVal < 1) parsedVal = 1;
+            if (parsedVal > 60) parsedVal = 60;
+
+            currentFps = parsedVal;
+            
+            // 同步滑杆和输入框的显示
+            fpsSlider.value = currentFps;
+            fpsInput.value = currentFps;
+
+            // 如果当前正在播放，则应用新的帧率
+            if (isPlaying) {
+                startPlayback(); 
+            }
+        }
+
+        // 监听滑杆拖动
+        fpsSlider.addEventListener('input', (e) => {
+            handleFpsChange(e.target.value);
+        });
+
+        // 监听数字框输入 (失去焦点或按回车时触发)
+        fpsInput.addEventListener('change', (e) => {
+            handleFpsChange(e.target.value);
+        });
+
+        // 页面加载完成后自动开始播放
+        startPlayback();
     });
 </script>
 </body>
