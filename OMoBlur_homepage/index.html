@@ -749,28 +749,54 @@
         <div class="section-title">Discussion</div>
         
         <div class="discussion-container">
-            <details class="discussion-item">
-                <summary>Limitation 1: </summary>
+            
+            <details class="discussion-item" open>
+                <summary>Scope of Model Capabilities</summary>
                 <div class="discussion-content">
-                    ddd
+                    <p><strong>Global Motion Blur:</strong> Our released model is currently ineffective for severe camera motion but can adequately handle slight camera shake combined with standard object motion.</p>
+                    
+                    <p><strong>Boundaries of Local Motion Deblurring:</strong> Please refer to the dynamic motion clip below to observe the operational boundaries.</p>
+                    
+                    <div style="text-align: center; margin: 15px 0; padding: 30px; background-color: #f0f3f6; border: 2px dashed #d0d7de; border-radius: 8px;">
+                        <em>[Video/Carousel Component Placeholder]</em><br>
+                        <span style="font-size: 0.85em; color: #666;">Insert your photo carousel with frame rate controls and caption here.</span>
+                    </div>
+                    
+                    <p><strong>Generalization to Smartphone Images:</strong> Currently, our model cannot process these effectively. Due to the complex multi-frame strategies employed by modern smartphone ISPs, the resulting blurry outputs no longer follow the data distribution of a single-exposure physical blur.</p>
                 </div>
             </details>
 
             <details class="discussion-item">
-                <summary>Future Work</summary>
+                <summary>Further Utilization of the Dataset</summary>
                 <div class="discussion-content">
-                    ddd
+                    <p>How can we leverage the continuous frame sequences provided in this dataset to synthesize new training data?</p>
+                    <ul style="margin-top: 0; padding-left: 20px;">
+                        <li><strong>Multi-frame Optimization:</strong> Enabling networks to restore a single sharp image from a multi-frame sequence with varying exposure times, or further jointly optimizing auto-exposure and ISO settings during capture.</li>
+                        <li><strong>ISP Generalization:</strong> Enhancing network generalization to effectively process blurry images output by any modern imaging device, regardless of whether they strictly conform to the physical laws of single-exposure.</li>
+                    </ul>
                 </div>
             </details>
 
             <details class="discussion-item">
-                <summary>Discussion on </summary>
+                <summary>Single-Frame Deblurring Capability vs. Blur Characteristics</summary>
                 <div class="discussion-content">
-                    ddd
+                    <p>We observe that deblurring performance is correlated with both absolute blur (in pixels) and relative blur (displacement relative to the object's own size). This phenomenon may be inherently tied to the network's effective receptive field/processing capacity and the degree of texture aliasing.</p>
+                    
+                    <p>For instance, consider a large and a small windmill in the same scene. If the large windmill's angular velocity is half that of the small one, and its radius is twice as large, the trajectory length swept by their outer blades within a single exposure is identical. However, the visual blur is noticeably more severe on the small windmill. When the exposure time increases to a critical node (<i>t</i>), the small windmill's blur may become completely unrecoverable. Conversely, the large windmill can be downsampled by a factor of 2, making it equivalent to the small windmill at time <i>t/2</i> for the network, thereby allowing successful restoration. This failure time node <i>t</i> is also highly dependent on the width of the windmill blades.</p>
+                    
+                    <p>We hope this work encourages systematic discussions and formal definitions regarding the relationship between single-image deblurring network capabilities and specific blurry image characteristics, which would better guide future dataset construction, network design, and training strategies.</p>
                 </div>
             </details>
+
+            <details class="discussion-item">
+                <summary>Rethinking the Dataset Paradigm: Must Ground Truth be the Physical "Truth"?</summary>
+                <div class="discussion-content">
+                    <p>Whether utilizing a coaxial beam splitter system or our proposed approach, ensuring the sharpness of the Ground Truth necessitates a very short exposure time. In urban evenings, this poses a severe dynamic range challenge. Current methodologies find it nearly impossible to capture a GT that simultaneously retains properly exposed bright highlights (like neon signs) and clean, noise-free dark areas.</p>
+                    <p>Sometimes, what we truly need is a visually "pleasing" GT, rather than a single-frame short-exposure GT. Ground Truth does not have to be the 'truth'.</p>
+                </div>
+            </details>
+
         </div>
-        
     </div>
 
     <div class="section">
