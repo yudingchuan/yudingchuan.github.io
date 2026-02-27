@@ -605,6 +605,29 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative; /* 👈 新增这一行！ */
+        }
+        /* --- 新增：三联图的覆盖标签样式 --- */
+        .seq-labels {
+            position: absolute;
+            top: 12px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around; /* 让标签在三个画面中均匀分布 */
+            z-index: 10;
+            pointer-events: none; /* 防止标签阻挡鼠标点击等交互事件 */
+        }
+
+        .seq-labels span {
+            background-color: rgba(0, 0, 0, 0.65);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
 
         .seq-viewport img {
@@ -900,11 +923,14 @@
                 <div class="discussion-content">
                     <p><strong>Global Motion Blur:</strong> Our released model is currently ineffective for severe camera motion but can adequately handle slight camera shake combined with standard object motion.</p>
                     
-                    <p><strong>Boundaries of Local Motion Deblurring:</strong> As shown in the dynamic motion clip below, reconstruction artifacts tend to increase as the motion magnitude increases. Blurry inputs are real-captured by our industrial camera with 20ms exposure. </p>
-                    <p>(Left - Middle - Right: Blurry input - Restored - Predicted Gate)</p>
-                    
+                    <p><strong>Boundaries of Local Motion Deblurring:</strong> As shown in the dynamic motion clip below, reconstruction artifacts tend to increase as the motion magnitude increases. (Blurry inputs are real-captured by our industrial camera with 20ms exposure.) </p>
                     <div class="seq-player-container">
                         <div class="seq-viewport">
+                            <div class="seq-labels">
+                                <span>Blurry Input</span>
+                                <span>Restored</span>
+                                <span>Predicted Gate</span>
+                            </div>
                             <img id="motionSeqFrame" src=".\images\0265_triplet_combined.png" alt="Motion Sequence">
                         </div>
                         
