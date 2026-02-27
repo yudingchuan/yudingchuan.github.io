@@ -601,7 +601,7 @@
             border-radius: 6px;
             overflow: hidden;
             background-color: #eee; /* 图片加载前的占位底色 */
-            aspect-ratio: 16 / 9; /* 你可以根据你的图片比例修改这里，比如 4/3 */
+            aspect-ratio: 162 / 55; /* 你可以根据你的图片比例修改这里，比如 4/3 */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -900,7 +900,7 @@
                 <div class="discussion-content">
                     <p><strong>Global Motion Blur:</strong> Our released model is currently ineffective for severe camera motion but can adequately handle slight camera shake combined with standard object motion.</p>
                     
-                    <p><strong>Boundaries of Local Motion Deblurring:</strong> Please refer to the dynamic motion clip below. Left - Middle - Right: Blurry input - Restored - Predicted Gate</p>
+                    <p><strong>Boundaries of Local Motion Deblurring:</strong> As shown in the dynamic motion clip below, reconstruction artifacts tend to increase as the motion magnitude increases (Left - Middle - Right: Blurry input - Restored - Predicted Gate). </p>
                     
                     <div class="seq-player-container">
                         <div class="seq-viewport">
