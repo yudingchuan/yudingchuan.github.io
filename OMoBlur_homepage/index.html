@@ -900,11 +900,11 @@
                 <div class="discussion-content">
                     <p><strong>Global Motion Blur:</strong> Our released model is currently ineffective for severe camera motion but can adequately handle slight camera shake combined with standard object motion.</p>
                     
-                    <p><strong>Boundaries of Local Motion Deblurring:</strong> Please refer to the dynamic motion clip below to observe the operational boundaries.</p>
+                    <p><strong>Boundaries of Local Motion Deblurring:</strong> Please refer to the dynamic motion clip below. Left - Middle - Right: Blurry input - Restored - Predicted Gate</p>
                     
                     <div class="seq-player-container">
                         <div class="seq-viewport">
-                            <img id="motionSeqFrame" src=".\images\seq\frame_0001.jpg" alt="Motion Sequence">
+                            <img id="motionSeqFrame" src=".\images\0265_triplet_combined.png" alt="Motion Sequence">
                         </div>
                         
                         <div class="seq-controls">
@@ -1018,11 +1018,15 @@
     document.addEventListener("DOMContentLoaded", function() {
         // 1. 在这里填入你所有的序列帧图片路径
         const frameUrls = [
-            ".\\images\\seq\\frame_0001.jpg",
-            ".\\images\\seq\\frame_0002.jpg",
-            ".\\images\\seq\\frame_0003.jpg",
-            ".\\images\\seq\\frame_0004.jpg",
-            ".\\images\\seq\\frame_0005.jpg",
+            ".\\images\\0265_triplet_combined.png",
+            ".\\images\\0266_triplet_combined.png",
+            ".\\images\\0267_triplet_combined.png",
+            ".\\images\\0268_triplet_combined.png",
+            ".\\images\\0269_triplet_combined.png",
+            ".\\images\\0270_triplet_combined.png",
+            ".\\images\\0271_triplet_combined.png",
+            ".\\images\\0272_triplet_combined.png",
+            ".\\images\\0273_triplet_combined.png",
             // ... 根据需要继续添加
         ];
 
