@@ -895,7 +895,7 @@
         
         <div class="discussion-container">
             
-            <details class="discussion-item" open>
+            <details class="discussion-item">
                 <summary>Scope of Model Capabilities</summary>
                 <div class="discussion-content">
                     <p><strong>Global Motion Blur:</strong> Our released model is currently ineffective for severe camera motion but can adequately handle slight camera shake combined with standard object motion.</p>
@@ -928,10 +928,11 @@
             <details class="discussion-item">
                 <summary>Further Utilization of the Dataset</summary>
                 <div class="discussion-content">
-                    <p>How can we leverage the continuous frame sequences provided in this dataset to synthesize new training data?</p>
+                    <p>The almost continuous frame sequences provided in this dataset open up possibilities for broader explorations beyond standard deblurring tasks. For instance:</p>
                     <ul style="margin-top: 0; padding-left: 20px;">
-                        <li><strong>Multi-frame Optimization:</strong> Enabling networks to restore a single sharp image from a multi-frame sequence with varying exposure times, or further jointly optimizing auto-exposure and ISO settings during capture.</li>
-                        <li><strong>ISP Generalization:</strong> Enhancing network generalization to effectively process blurry images output by any modern imaging device, regardless of whether they strictly conform to the physical laws of single-exposure.</li>
+                        <li> Enabling networks to generate a single sharp output image from a multi-frame sequence with varying exposure times, or further jointly optimizing the strategy of auto-exposure and ISO settings across multiple frames during capture.</li>
+                        <li> Enhancing network generalization to effectively process single blurry image output by any modern imaging device, regardless of whether they strictly conform to the physical laws of single-exposure.</li>
+                        <li> ... </li>
                     </ul>
                 </div>
             </details>
