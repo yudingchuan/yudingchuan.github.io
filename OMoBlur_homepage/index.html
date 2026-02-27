@@ -900,7 +900,8 @@
                 <div class="discussion-content">
                     <p><strong>Global Motion Blur:</strong> Our released model is currently ineffective for severe camera motion but can adequately handle slight camera shake combined with standard object motion.</p>
                     
-                    <p><strong>Boundaries of Local Motion Deblurring:</strong> As shown in the dynamic motion clip below, reconstruction artifacts tend to increase as the motion magnitude increases (Left - Middle - Right: Blurry input - Restored - Predicted Gate). </p>
+                    <p><strong>Boundaries of Local Motion Deblurring:</strong> As shown in the dynamic motion clip below, reconstruction artifacts tend to increase as the motion magnitude increases. Blurry inputs are real-captured by our industrial camera with 20ms exposure. </p>
+                    <p>(Left - Middle - Right: Blurry input - Restored - Predicted Gate)</p>
                     
                     <div class="seq-player-container">
                         <div class="seq-viewport">
@@ -921,7 +922,7 @@
                         </div>
                     </div>
                     
-                    <p><strong>Generalization to Smartphone Images:</strong> Currently, our model cannot process these effectively. Due to the complex multi-frame strategies employed by modern smartphone ISPs, the resulting blurry outputs no longer follow the data distribution of a single-exposure physical blur.</p>
+                    <p><strong>Generalization to Smartphone Images:</strong> Currently, our model cannot process these effectively. Due to the complex multi-frame strategies employed by modern smartphone ISPs, the resulting single blurry output no longer follow the data distribution of a single-exposure physical blur.</p>
                 </div>
             </details>
 
