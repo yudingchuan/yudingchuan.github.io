@@ -723,6 +723,85 @@
             -webkit-appearance: none;
             margin: 0;
         }
+
+        /* ================= 全屏协议蒙版样式 ================= */
+
+        /* 1. 蒙版本体 */
+        .license-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6); /* 深灰色半透明背景 */
+            backdrop-filter: blur(4px); /* 【核心】背景模糊，提升高级感 */
+            z-index: 998; /* 层级很高，但要比下拉菜单低 */
+            
+            /* 弹性布局让文字居中 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            /* 默认隐藏 */
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* 丝滑的过渡动画 */
+            
+            /* 【关键】允许鼠标穿透！ */
+            /* 这样鼠标虽然视觉上在蒙版上，但实际上还能操作底下的按钮，防止hover状态闪烁 */
+            pointer-events: none; 
+        }
+        
+        /* 2. 提示文字框 */
+        .license-box {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 1px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            
+            /* 初始状态稍微往下沉一点，动效出来时上浮 */
+            transform: translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .license-box svg {
+            width: 40px;
+            height: 40px;
+            stroke: #ffcc00; /* 黄色盾牌图标，起警示作用 */
+            fill: rgba(255, 204, 0, 0.2);
+        }
+        
+        /* 3. 触发机制：鼠标悬停整个 Dataset 区域时显示蒙版 */
+        .dataset-dropdown:hover .license-overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .dataset-dropdown:hover .license-box {
+            transform: translateY(0); /* 文字上浮归位 */
+        }
+        
+        /* 4. 层级修正：为了不让蒙版遮住“Dataset”按钮本身和“下拉菜单” */
+        /* 我们需要提升这两个元素的层级，让它们看起来像是浮在蒙版之上 */
+        
+        .dataset-dropdown .btn {
+            position: relative; 
+            z-index: 1000; /* 按钮最高，浮于蒙版之上 */
+        }
+        
+        .dropdown-content {
+            z-index: 1000; /* 下拉菜单也浮于蒙版之上 */
+        }
+        
+        /* 为了让下拉菜单看起来更清晰，给它加个稍微强一点的阴影 */
+        .dataset-dropdown:hover .dropdown-content {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
     </style>
 </head>
 <body>
@@ -791,6 +870,17 @@
                         Baidu Netdisk
                     </a>
                 </div>
+
+                <div class="license-overlay">
+                    <div class="license-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        <span>注意：请严格遵循数据集内的使用协议<br>
+                        <small style="opacity: 0.8; font-weight: 400;">Strictly follow the license agreement enclosed.</small></span>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </header>
