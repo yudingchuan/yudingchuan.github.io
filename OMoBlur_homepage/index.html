@@ -176,67 +176,63 @@
             transform: translateX(-50%) translateY(0); 
         }
 
-        /* 弹出的小按钮样式：细灰线勾勒边界 */
+        /* ================== 下拉菜单按钮修复版 ================== */
+        
+        /* 1. 按钮容器基础样式 */
         .dropdown-btn {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px; /* 图标和文字的间距 */
             background-color: #ffffff;
             padding: 8px 18px;
-            border-radius: 20px;
+            border-radius: 50px; /* 强制圆角 */
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 600;
             color: #24292f;
-            border: 1px solid #d0d7de; /* 1px的高级细灰线 */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
-            transition: all 0.3s ease; /* 统一平滑过渡 */
+            border: 1px solid #d0d7de; 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            
+            /* 【关键】防止按钮被撑大或压缩 */
+            white-space: nowrap; 
+            flex-shrink: 0; 
+            
+            transition: all 0.3s ease;
         }
-
-        /* 修复 3：仅改变边框颜色，不再模拟双重阴影，彻底解决抽搐怪异感 */
-        /* .dropdown-btn:hover {
-            background-color: #ffffff; 
-            border-color: #24292f; /* 灰线平滑过渡为深空灰线 */
-            box-shadow: 0 6px 16px rgba(36, 41, 47, 0.22); /* 阴影平滑加深 */
-            transform: translateY(-2px);
-        } */
-
-        .dropdown-btn img {
-            width: 18px;
-            height: 18px;
+        
+        /* 2. 【核心修复】强制限制图标大小 */
+        /* 无论你用 <img> 还是 <svg>，统统锁死在 18px */
+        .dropdown-btn img,
+        .dropdown-btn svg {
+            width: 18px !important;  /* 强制生效 */
+            height: 18px !important; /* 强制生效 */
             object-fit: contain;
-            transition: transform 0.3s ease; 
+            fill: currentColor; /* 让 SVG 颜色跟随文字 */
+            flex-shrink: 0;     /* 防止图标被文字挤扁 */
+            transition: transform 0.3s ease;
         }
-
-        /* 悬停时，Logo 原色保留，轻微放大增加灵动感 */
-        /* .dropdown-btn:hover img {
-            transform: scale(1.1);
-        } */
-
-        /* 重写悬停样式：从“投影”改为“发光” */
+        
+        /* 3. 悬停交互：发光效果 */
         .dropdown-btn:hover {
             background-color: #ffffff;
+            /* 极淡的白边，柔化边缘 */
+            border-color: rgba(255, 255, 255, 0.8);
             
-            /* 亮色描边：实际上因为底色也是白，这里用极淡的白色透明边框来柔化边缘 */
-            border-color: rgba(255, 255, 255, 1); 
-        
-            /* 【核心魔法】双重光晕 */
-            /* 第一层：紧贴的高亮白光 (0.5透明度) */
-            /* 第二层：扩散较远的氛围柔光 (0.3透明度) */
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 
-                        0 0 30px rgba(255, 255, 255, 0.2);
+            /* 呼吸灯光晕效果 */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 
+                        0 0 30px rgba(255, 255, 255, 0.3);
             
-            /* 稍微上浮更多一点，配合发光更有“灵动感” */
+            /* 整体轻微上浮放大 */
             transform: translateY(-3px) scale(1.02);
             
-            /* 字体颜色：保持深黑，保证在发光白底上的可读性 */
             color: #000000;
+            z-index: 1001; /* 确保悬停时浮在最上层 */
         }
         
-        /* 额外优化：让图标在发光时也跟着稍微亮一点/大一点 */
-        .dropdown-btn:hover img {
-            transform: scale(1.1);
-            filter: brightness(1.1); /* 让 Logo 更鲜艳一点 */
+        /* 4. 悬停时图标微动 */
+        .dropdown-btn:hover img,
+        .dropdown-btn:hover svg {
+            transform: scale(1.15);
         }
         /* ============================================== */
 
