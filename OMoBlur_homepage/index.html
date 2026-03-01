@@ -158,15 +158,35 @@
             z-index: 10;
         }
 
-        /* 修复 2：悬停整个区域时，主按钮不仅保持黑底，还要保持上浮和图标放大 */
+        
+        /* ================= Dataset 按钮：琥珀金光方案 ================= */
+
         .dataset-dropdown:hover .btn {
-            background-color: #24292f;
-            color: #ffffff;
-            box-shadow: 0 6px 18px rgba(36, 41, 47, 0.2);
-            transform: translateY(-2px); /* 维持上浮状态 */
+            background-color: #24292f; /* 保持深色基调 */
+            color: #ffcc00; /* 文字变更为盾牌的黄色，达成视觉统一 */
+            
+            /* 核心：金光氛围 */
+            /* 第一层：明亮的黄色细边框 */
+            border-color: rgba(255, 204, 0, 0.8); 
+            
+            /* 第二层：双重金光 */
+            /* 0px 0px 10px：紧贴边缘的琥珀色内发光感 */
+            /* 0px 0px 20px：向外扩散的金色雾气 */
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.4), 
+                        0 0 25px rgba(255, 204, 0, 0.2);
+        
+            transform: translateY(-2px);
+            position: relative;
+            z-index: 1001;
+            transition: all 0.4s ease;
         }
+        
+        /* 图标同步变色并增加辉光 */
         .dataset-dropdown:hover .btn svg {
-            transform: scale(1.1); /* 维持图标放大状态 */
+            fill: #ffcc00; /* 图标填充色改为黄色 */
+            transform: scale(1.1);
+            /* 让图标像点亮的小灯泡 */
+            filter: drop-shadow(0 0 5px rgba(255, 204, 0, 0.8));
         }
         
         /* 悬停时弹出子菜单 */
@@ -804,8 +824,20 @@
             visibility: visible;
         }
         
-        .dataset-dropdown:hover .license-box {
+        /* .dataset-dropdown:hover .license-box {
             transform: translateY(0); /* 文字上浮归位 */
+        } */
+        /* 修改你之前的 .dataset-dropdown:hover .license-box 逻辑 */
+        .dataset-dropdown:hover .license-box svg {
+            /* 让盾牌产生呼吸灯效果 */
+            animation: shield-pulse 2s infinite ease-in-out;
+            filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.6));
+        }
+        
+        @keyframes shield-pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
         }
         
         /* 4. 层级修正：为了不让蒙版遮住“Dataset”按钮本身和“下拉菜单” */
