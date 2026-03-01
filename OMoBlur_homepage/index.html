@@ -830,14 +830,14 @@
         /* 当悬停时，激活 SVG 盾牌的呼吸动画 */
         .dataset-dropdown:hover .license-box svg {
             /* 核心：盾牌自身小幅度呼吸 */
-            animation: shield-breathing 2.5s infinite ease-in-out;
+            animation: shield-breathing 1.8s infinite ease-in-out;
         }
         
         /* 当悬停时，激活金光伪元素的呼吸动画 */
         .dataset-dropdown:hover .license-box::before {
             opacity: 1;
             /* 核心：金光自身大幅度呼吸 */
-            animation: golden-burst-breathing 2.5s infinite ease-in-out;
+            animation: golden-burst-breathing 1.8s infinite ease-in-out;
         }
         
         
@@ -918,9 +918,9 @@
                 transform: scale(1.45); /* 核心：大幅度放大，远大于盾牌 */
                 opacity: 1; /* 最高亮度 */
                 /* 核心：动画顶点时，光晕扩散半径和亮度也同步大幅增加，形成“喷涌”感 */
-                box-shadow: 0 0 25px rgba(255, 204, 0, 0.7), 
-                            0 0 60px rgba(255, 204, 0, 0.5), 
-                            0 0 110px rgba(255, 204, 0, 0.3);
+                box-shadow: 0 0 25px rgba(255, 204, 0, 0.95), 
+                            0 0 60px rgba(255, 204, 0, 0.8), 
+                            0 0 110px rgba(255, 204, 0, 0.6);
             }
             100% {
                 transform: scale(1);
