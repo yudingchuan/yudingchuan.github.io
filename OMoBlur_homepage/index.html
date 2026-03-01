@@ -814,7 +814,7 @@
             z-index: 10;
             
             /* 设置一个固定的宽高范围，让内部元素居中，且不撑大蒙版 */
-            width: 320px; /* 根据文字长度微调 */
+            width: 450px; /* 根据文字长度微调 */
             height: 180px; 
             
             /* 初始状态上浮效果保持 */
@@ -897,11 +897,13 @@
         /* 4. 文字部分：绝对定位到下方，不参与任何动画 */
         .license-box span {
             position: absolute;
-            bottom: 10px; /* 固定在容器底部 */
+            top: 75px;
             left: 0;
             width: 100%; /* 撑满容器宽度以实现 text-align: center */
             display: block;
-            line-height: 1.5;
+            line-height: 1.6;
+            /* 核心修复：强制中文不换行，除非遇到 <br> */
+            white-space: nowrap;
         }
         
         /* ================== 定义两个独立的呼吸动画 ================== */
@@ -1024,8 +1026,10 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                         </svg>
-                        <span>注意：请严格遵循数据集内的使用协议<br>
-                        <small style="opacity: 0.8; font-weight: 400;">Strictly follow the license agreement enclosed.</small></span>
+                        <div class="license-text">
+                            <span class="main-notice">请遵守数据集使用许可协议</span>
+                            <span class="sub-notice">Please adhere to the dataset license agreement.</span>
+                        </div>
                     </div>
                 </div>
                 
