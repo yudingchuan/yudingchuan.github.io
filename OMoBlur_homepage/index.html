@@ -792,6 +792,8 @@
             /* 【关键】允许鼠标穿透！ */
             /* 这样鼠标虽然视觉上在蒙版上，但实际上还能操作底下的按钮，防止hover状态闪烁 */
             pointer-events: none; 
+
+            isolation: isolate; /* 强制创建一个独立的层叠空间 */
         }
         
         /* 2. 提示文字框 */
@@ -809,6 +811,9 @@
             /* 初始状态稍微往下沉一点，动效出来时上浮 */
             transform: translateY(20px);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+            position: relative;
+            z-index: 10; /* 只要比父元素高即可，确保它在遮罩的背景色之上 */
         }
         
         .license-box svg {
@@ -831,8 +836,12 @@
             /* 核心：设置缩放中心为正中央 */
             transform-origin: center;
             display: inline-block; /* 确保 transform 生效更好 */
+
+            /* 核心修复：添加 will-change 告诉浏览器单独渲染这个元素，防止滤镜被父级模糊层干扰 */
+            will-change: transform, filter;
+            
             /* 核心：确保动画名称对应 */
-            animation: shield-glow-pulse 2.5s infinite ease-in-out;
+            animation: shield-glow-pulse 2s infinite ease-in-out;
             filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.4));
         }
         
