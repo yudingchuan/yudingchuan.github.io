@@ -795,7 +795,10 @@
 
             isolation: isolate; /* 强制创建一个独立的层叠空间 */
         }
-        
+        .dataset-dropdown:hover .license-overlay {
+            opacity: 1;
+            visibility: visible;
+        }
          /* ======================== 盾牌呼吸灯核心修复版 ======================== */
         
         /* 1. 容器：确保伪元素绝对定位基准 */
@@ -852,7 +855,7 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        
+
         /* 3. 盾牌 SVG 保持简洁 */
         .license-box svg {
             width: 40px;
