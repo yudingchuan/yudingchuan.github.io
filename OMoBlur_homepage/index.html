@@ -830,14 +830,14 @@
         /* 当悬停时，激活 SVG 盾牌的呼吸动画 */
         .dataset-dropdown:hover .license-box svg {
             /* 核心：盾牌自身小幅度呼吸 */
-            animation: shield-breathing 1.8s infinite ease-in-out;
+            animation: shield-breathing 2.1s infinite ease-in-out;
         }
         
         /* 当悬停时，激活金光伪元素的呼吸动画 */
         .dataset-dropdown:hover .license-box::before {
             opacity: 1;
             /* 核心：金光自身大幅度呼吸 */
-            animation: golden-burst-breathing 1.8s infinite ease-in-out;
+            animation: golden-burst-breathing 2.1s infinite ease-in-out;
         }
         
         
@@ -871,20 +871,20 @@
             
             /* 起始尺寸进一步缩小 (从40px降到30px) */
             /* 核心修改 B：起始尺寸从 30px 调大到 38px (接近盾牌的 42px) */
-            width: 38px; 
-            height: 38px;
+            width: 28px; 
+            height: 28px;
             
             /* 核心修改 C：margin 设为尺寸的一半以重新居中 */
-            margin-top: -19px; 
-            margin-left: -19px;
+            margin-top: -14px; 
+            margin-left: -14px;
             
             border-radius: 50%;
             /* 核心修改 D：起始就是最浓缩的纯金色，不要透明度 */
-            background-color: rgba(255, 204, 0, 1); 
+            background-color: rgba(255, 204, 0, 0.5); 
             
             /* 核心修改 E：缩小光晕扩散半径，起始状态极度紧凑 */
-            box-shadow: 0 0 10px rgba(255, 204, 0, 1), 
-                        0 0 20px rgba(255, 204, 0, 0.8);
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.5), 
+                        0 0 20px rgba(255, 204, 0, 0.2);
             
             filter: blur(12px); 
             z-index: -1; /* 在 SVG 后面 */
@@ -922,14 +922,14 @@
             50% {
                 /* 核心修改 A：缩放从 1.45 降到 1.12 */
                 /* 因为起始基数变大了（38px），所以只需要放大一点点就能在视觉上形成喷涌感 */
-                transform: scale(1.12); 
+                transform: scale(1.35); 
                 
                 opacity: 1; /* 最高亮度 */
                 
                 /* 核心修改 B：同步之前的数值，半径最大限制在 50px */
                 box-shadow: 0 0 15px rgba(255, 215, 0, 1), 
-                            0 0 30px rgba(255, 204, 0, 1), 
-                            0 0 50px rgba(255, 204, 0, 0.8);
+                            0 0 20px rgba(255, 204, 0, 0.9), 
+                            0 0 40px rgba(255, 204, 0, 0.7);
             }
             100% {
                 transform: scale(1);
