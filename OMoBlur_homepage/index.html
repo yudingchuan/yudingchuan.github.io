@@ -796,7 +796,9 @@
             isolation: isolate; /* 强制创建一个独立的层叠空间 */
         }
         
-        /* 2. 提示文字框 */
+         /* ======================== 盾牌呼吸灯核心修复版 ======================== */
+        
+        /* 1. 容器：确保伪元素绝对定位基准 */
         .license-box {
             color: white;
             font-size: 1.2rem;
@@ -808,56 +810,96 @@
             align-items: center;
             gap: 15px;
             
-            /* 初始状态稍微往下沉一点，动效出来时上浮 */
+            /* 核心：为光晕伪元素提供定位基准 */
+            position: relative; 
+            z-index: 10; /* 确保文字在光晕上方 */
+            
+            /* 初始状态稍微往下沉，动效出来时上浮 */
             transform: translateY(20px);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-
-            position: relative;
-            z-index: 10; /* 只要比父元素高即可，确保它在遮罩的背景色之上 */
         }
         
+        /* 2. 核心魔法：创建大范围柔光圈（伪元素） */
+        .license-box::before {
+            content: "";
+            position: absolute;
+            
+            /* 定位在盾牌 SVG 的位置 (大致居中) */
+            top: 0px; /* 根据你的间距微调，让它圆心在 SVG 中心 */
+            left: 50%;
+            transform: translateX(-50%);
+            
+            /* 初始大小 */
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%; /* 圆形 */
+            
+            /* 琥珀色基底色 */
+            background-color: rgba(255, 204, 0, 0.5); 
+            
+            /* 核心：多层大范围 box-shadow 叠加，创建弥漫光晕 */
+            box-shadow: 0 0 30px rgba(255, 204, 0, 0.6), /* 内层较亮 */
+                        0 0 60px rgba(255, 204, 0, 0.4), /* 中层弥漫 */
+                        0 0 100px rgba(255, 204, 0, 0.2); /* 外层极淡 */
+            
+            /* 叠加高斯模糊，让光线更柔和 */
+            filter: blur(10px); 
+            
+            /* 放在 SVG 后面 */
+            z-index: -1; 
+            
+            /* 初始透明度 */
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* 3. 盾牌 SVG 保持简洁 */
         .license-box svg {
             width: 40px;
             height: 40px;
-            stroke: #ffcc00; /* 黄色盾牌图标，起警示作用 */
-            fill: rgba(255, 204, 0, 0.2);
-        }
-        
-        /* 3. 触发机制：鼠标悬停整个 Dataset 区域时显示蒙版 */
-        .dataset-dropdown:hover .license-overlay {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* 盾牌 SVG 的强制呼吸效果 */
-        .dataset-dropdown:hover .license-box svg {
             stroke: #ffcc00;
             fill: rgba(255, 204, 0, 0.1);
-            /* 核心：设置缩放中心为正中央 */
-            transform-origin: center;
-            display: inline-block; /* 确保 transform 生效更好 */
-
-            /* 核心修复：添加 will-change 告诉浏览器单独渲染这个元素，防止滤镜被父级模糊层干扰 */
-            will-change: transform, filter;
-            
-            /* 核心：确保动画名称对应 */
-            animation: shield-glow-pulse 2s infinite ease-in-out;
-            filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.4));
+            position: relative;
+            z-index: 1; /* 在光晕上方 */
         }
         
-        /* 定义呼吸动画：大小和光晕同时起伏 */
-        @keyframes shield-glow-pulse {
+        /* 4. 触发机制 */
+        
+        /* 悬停整个区域时：文字上浮，光晕显现 */
+        .dataset-dropdown:hover .license-box {
+            transform: translateY(0);
+        }
+        .dataset-dropdown:hover .license-box::before {
+            opacity: 1;
+            /* 核心：挂载大范围光晕呼吸动画 */
+            animation: giant-shield-halo-pulse 2.5s infinite ease-in-out;
+        }
+        
+        /* 5. 定义新的大范围光晕呼吸动画 */
+        @keyframes giant-shield-halo-pulse {
             0% {
-                transform: scale(1);
-                filter: drop-shadow(0 0 5px rgba(255, 204, 0, 0.4));
+                /* 初始：标准大小，标准光晕 */
+                transform: translateX(-50%) scale(1);
+                box-shadow: 0 0 30px rgba(255, 204, 0, 0.6),
+                            0 0 60px rgba(255, 204, 0, 0.4),
+                            0 0 100px rgba(255, 204, 0, 0.2);
+                opacity: 0.8;
             }
             50% {
-                transform: scale(1.15); /* 放大 1.15 倍 */
-                filter: drop-shadow(0 0 20px rgba(255, 204, 0, 0.8)); /* 光晕扩散 */
+                /* 呼吸顶点：放大灯罩，增加阴影扩散范围和亮度 */
+                transform: translateX(-50%) scale(1.3); /* 放大灯罩 */
+                box-shadow: 0 0 50px rgba(255, 204, 0, 0.8), /* 更亮 */
+                            0 0 100px rgba(255, 204, 0, 0.6), /* 扩散更远 */
+                            0 0 150px rgba(255, 204, 0, 0.3); /* 最外层弥漫 */
+                opacity: 1; /* 全亮 */
             }
             100% {
-                transform: scale(1);
-                filter: drop-shadow(0 0 5px rgba(255, 204, 0, 0.4));
+                /* 回到初始 */
+                transform: translateX(-50%) scale(1);
+                box-shadow: 0 0 30px rgba(255, 204, 0, 0.6),
+                            0 0 60px rgba(255, 204, 0, 0.4),
+                            0 0 100px rgba(255, 204, 0, 0.2);
+                opacity: 0.8;
             }
         }
         
