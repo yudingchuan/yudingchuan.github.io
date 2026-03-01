@@ -775,7 +775,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(0, 0, 0, 0.8); /* 深灰色半透明背景 */
+            background-color: rgba(0, 0, 0, 0.75); /* 深灰色半透明背景 */
             backdrop-filter: blur(8px); /* 【核心】背景模糊，提升高级感 */
             z-index: 998; /* 层级很高，但要比下拉菜单低 */
             
@@ -827,17 +827,31 @@
         /* .dataset-dropdown:hover .license-box {
             transform: translateY(0); /* 文字上浮归位 */
         } */
-        /* 修改你之前的 .dataset-dropdown:hover .license-box 逻辑 */
+
+        /* 盾牌 SVG 的强制呼吸效果 */
         .dataset-dropdown:hover .license-box svg {
-            /* 让盾牌产生呼吸灯效果 */
-            animation: shield-pulse 2s infinite ease-in-out;
-            filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.6));
+            stroke: #ffcc00;
+            fill: rgba(255, 204, 0, 0.1);
+            
+            /* 核心：确保动画名称对应 */
+            animation: shield-glow-pulse 2.5s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.4));
         }
         
-        @keyframes shield-pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
+        /* 定义呼吸动画：大小和光晕同时起伏 */
+        @keyframes shield-glow-pulse {
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px rgba(255, 204, 0, 0.4));
+            }
+            50% {
+                transform: scale(1.1); /* 放大 1.1 倍 */
+                filter: drop-shadow(0 0 20px rgba(255, 204, 0, 0.8)); /* 光晕扩散 */
+            }
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px rgba(255, 204, 0, 0.4));
+            }
         }
         
         /* 4. 层级修正：为了不让蒙版遮住“Dataset”按钮本身和“下拉菜单” */
