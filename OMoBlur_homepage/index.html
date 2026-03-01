@@ -823,16 +823,14 @@
             opacity: 1;
             visibility: visible;
         }
-        
-        /* .dataset-dropdown:hover .license-box {
-            transform: translateY(0); /* 文字上浮归位 */
-        } */
 
         /* 盾牌 SVG 的强制呼吸效果 */
         .dataset-dropdown:hover .license-box svg {
             stroke: #ffcc00;
             fill: rgba(255, 204, 0, 0.1);
-            
+            /* 核心：设置缩放中心为正中央 */
+            transform-origin: center;
+            display: inline-block; /* 确保 transform 生效更好 */
             /* 核心：确保动画名称对应 */
             animation: shield-glow-pulse 2.5s infinite ease-in-out;
             filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.4));
@@ -845,7 +843,7 @@
                 filter: drop-shadow(0 0 5px rgba(255, 204, 0, 0.4));
             }
             50% {
-                transform: scale(1.1); /* 放大 1.1 倍 */
+                transform: scale(1.15); /* 放大 1.15 倍 */
                 filter: drop-shadow(0 0 20px rgba(255, 204, 0, 0.8)); /* 光晕扩散 */
             }
             100% {
