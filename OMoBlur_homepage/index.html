@@ -194,12 +194,12 @@
         }
 
         /* 修复 3：仅改变边框颜色，不再模拟双重阴影，彻底解决抽搐怪异感 */
-        .dropdown-btn:hover {
+        /* .dropdown-btn:hover {
             background-color: #ffffff; 
             border-color: #24292f; /* 灰线平滑过渡为深空灰线 */
             box-shadow: 0 6px 16px rgba(36, 41, 47, 0.22); /* 阴影平滑加深 */
             transform: translateY(-2px);
-        }
+        } */
 
         .dropdown-btn img {
             width: 18px;
@@ -209,8 +209,34 @@
         }
 
         /* 悬停时，Logo 原色保留，轻微放大增加灵动感 */
+        /* .dropdown-btn:hover img {
+            transform: scale(1.1);
+        } */
+
+        /* 重写悬停样式：从“投影”改为“发光” */
+        .dropdown-btn:hover {
+            background-color: #ffffff;
+            
+            /* 亮色描边：实际上因为底色也是白，这里用极淡的白色透明边框来柔化边缘 */
+            border-color: rgba(255, 255, 255, 1); 
+        
+            /* 【核心魔法】双重光晕 */
+            /* 第一层：紧贴的高亮白光 (0.5透明度) */
+            /* 第二层：扩散较远的氛围柔光 (0.3透明度) */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 
+                        0 0 30px rgba(255, 255, 255, 0.2);
+            
+            /* 稍微上浮更多一点，配合发光更有“灵动感” */
+            transform: translateY(-3px) scale(1.02);
+            
+            /* 字体颜色：保持深黑，保证在发光白底上的可读性 */
+            color: #000000;
+        }
+        
+        /* 额外优化：让图标在发光时也跟着稍微亮一点/大一点 */
         .dropdown-btn:hover img {
             transform: scale(1.1);
+            filter: brightness(1.1); /* 让 Logo 更鲜艳一点 */
         }
         /* ============================================== */
 
@@ -733,8 +759,8 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(0, 0, 0, 0.6); /* 深灰色半透明背景 */
-            backdrop-filter: blur(4px); /* 【核心】背景模糊，提升高级感 */
+            background-color: rgba(0, 0, 0, 0.8); /* 深灰色半透明背景 */
+            backdrop-filter: blur(8px); /* 【核心】背景模糊，提升高级感 */
             z-index: 998; /* 层级很高，但要比下拉菜单低 */
             
             /* 弹性布局让文字居中 */
