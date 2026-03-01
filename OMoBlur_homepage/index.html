@@ -894,17 +894,36 @@
             transform-origin: center center; /* 确保缩放从中心开始 */
         }
         
-        /* 4. 文字部分：绝对定位到下方，不参与任何动画 */
-        .license-box span {
+        /* --- 修复开始 --- */
+
+        /* 1. 新增：让外层的 div 负责定位，定在盾牌下方 */
+        .license-text {
             position: absolute;
-            top: 75px;
+            top: 85px;  /* 稍微往下挪一点，给金光留出空间 */
             left: 0;
-            width: 100%; /* 撑满容器宽度以实现 text-align: center */
-            display: block;
-            line-height: 1.6;
-            /* 核心修复：强制中文不换行，除非遇到 <br> */
-            white-space: nowrap;
+            width: 100%;
+            text-align: center; /* 确保文字居中 */
         }
+
+        /* 2. 修改：span 只需要变成块级元素，自然换行即可 */
+        .license-box span {
+            /* 删掉 position: absolute, top, left 等定位属性 */
+            display: block;       /* 让两句话自动分成两行 */
+            line-height: 1.5;     /* 调整行间距 */
+            white-space: nowrap;  /* 保持不换行逻辑 */
+            
+            /* 可选：微调一下两行字的间距 */
+            margin-bottom: 4px;   
+        }
+        
+        /* 可选：让英文那一行字稍微小一点，更有层次感 */
+        .sub-notice {
+            font-size: 0.85em;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        /* --- 修复结束 --- */
         
         /* ================== 定义两个独立的呼吸动画 ================== */
         
