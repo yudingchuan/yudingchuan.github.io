@@ -104,43 +104,7 @@
 #pub-list article.columns:last-of-type{
   margin-bottom: 0 !important;
 }
-/* --- 针对 #pub-list 下的图片布局调整 --- */
 
-/* 1. 确保左侧列作为容器，内容垂直居中且充满高度 */
-#pub-list .columns .column.is-3 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* 垂直居中 */
-  padding-bottom: 0;       /* 微调：减少底部留白 */
-  padding-top: 0;          /* 微调：减少顶部留白 */
-}
-
-/* 2. 强制 Figure 容器撑满高度 */
-#pub-list .columns .column.is-3 .image {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  display: flex;          /* 去除图片底部的默认间隙 */
-}
-
-/* 3. 图片强制高度匹配，并使用 cover 保持比例 */
-#pub-list .columns .column.is-3 img {
-  height: 100%;           /* 强制高度跟随父容器（也就是跟随右侧文字高度） */
-  width: 100%;
-  object-fit: contain;      /* 关键：保持比例填满 */
-  object-position: center;/* 关键：始终显示图片中心 */
-  border-radius: 4px;     /* 可选：加一点圆角更好看 */
-  min-height: 120px;      /* 兜底：如果右侧文字太少，保证图片至少有这么高 */
-}
-
-/* 4. 移动端优化：手机上不需要强制高度，恢复自然显示 */
-@media screen and (max-width: 768px) {
-  #pub-list .columns .column.is-3 .image,
-  #pub-list .columns .column.is-3 img {
-    height: auto !important;
-    min-height: 0;
-  }
-}
 </style>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
